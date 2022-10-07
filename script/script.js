@@ -10,7 +10,6 @@ ProfileChange.addEventListener('click', function(){ // открытие форм
     nameInput.value = ProfileName.textContent;
     aboutInput.value = ProfilAbout.textContent;
 })
-
 function ClosePopup(){  // функция для закрытия формы
     popup.classList.remove('popup__opend');
 }
