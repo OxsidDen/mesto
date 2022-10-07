@@ -4,6 +4,8 @@
 @import url(../blocks/header/header.css);
 @import url(../blocks/logo/logo.css);
 @import url(../blocks/logo/_place/_header/logo_place_header.css);
+/* Стили для профиля */
+@import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__about/profile__about.css);
 @import url(../blocks/profile/__add/profile__add.css);
 @import url(../blocks/profile/__change/profile__change.css);
@@ -12,7 +14,7 @@
 @import url(../blocks/profile/__personal/profile__personal.css);
 @import url(../blocks/profile/__photo/profile__photo.css);
 @import url(../blocks/profile/__plus/profile__plus.css);
-@import url(../blocks/profile/profile.css);
+/* Стили для ленты фотграфий */
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/element/element.css);
 @import url(../blocks/element/__img/element__img.css);
@@ -24,8 +26,10 @@
 @import url(../blocks/line/line.css);
 @import url(../blocks/line/_place/_header/line_place_header.css);
 @import url(../blocks/line/_place/_popup/line_place_popup.css);
+/* стили для подвала */
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+/* стили для формы заполненияы */
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__about/popup__about.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
