@@ -6,6 +6,9 @@
     height: 32px;
     grid-row-start: 2;
     grid-row-end: 3;
+    border: 0;
+    padding: 0;
+    background-color: #00000000;
 }
 .popup__close-button:hover{
     opacity: 0.6;

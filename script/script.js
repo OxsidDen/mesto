@@ -5,14 +5,20 @@ let ProfileName = document.querySelector('.profile__name');
 let ProfilAbout = document.querySelector('.profile__about');
 let nameInput = popup.querySelector('.popup__name');
 let aboutInput = popup.querySelector('.popup__about');
+function ClosePopup(){  // функция для закрытия формы
+    popup.classList.remove('popup__opend');
+}
+function FormSubmit(evt) { //функция сохранения данных полученных от пользователя
+    evt.preventDefault();
+    ProfileName.textContent = nameInput.value;
+    ProfilAbout.textContent = aboutInput.value;
+    ClosePopup();
+}
 ProfileChange.addEventListener('click', function(){ // открытие формы для изменения профиля
     popup.classList.add('popup__opend');
     nameInput.value = ProfileName.textContent;
     aboutInput.value = ProfilAbout.textContent;
 })
-function ClosePopup(){  // функция для закрытия формы
-    popup.classList.remove('popup__opend');
-}
 popupClose.addEventListener('click',ClosePopup ); //само закрытие формы
 nameInput.addEventListener('click',function(){
     nameInput.value = ''; 
@@ -20,10 +26,4 @@ nameInput.addEventListener('click',function(){
 aboutInput.addEventListener('click',function(){ //очистка данных формы при нажатии
     aboutInput.value = '';
 } );
-function FormSubmit(evt) { //функция сохранения данных полученных от пользователя
-    evt.preventDefault();
-    ProfileName.textContent = nameInput.value;
-    ProfilAbout.textContent = aboutInput.value;
-    ClosePopup();
-}
 popup.addEventListener('submit', FormSubmit); //перенос данных из формы в профиль

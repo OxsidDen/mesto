@@ -6,6 +6,8 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    padding: 0;
+    background-color: #00000000;
 }
 .profile__change:hover{
     opacity: 0.6;
