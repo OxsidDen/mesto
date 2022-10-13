@@ -4,13 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link href="./styles/index.css" rel="stylesheet" > 
+  <link href="./pages/index.css" rel="stylesheet" > 
 </head>
-<body>
-  <div class="page">
+<body class="page">
     <header class="header">
       <div class="logo logo_place_header"></div>
-      <div class="line line_place_header"></div>
     </header>
     <main>
       <section class="profile">
@@ -21,8 +19,7 @@
             <button type="button" class="profile__change">
               <img src="./images/pen.svg" alt="Изменить профиль">
             </button>
-            <h2 class="profile__about">Физик, програмист и вожатый
-            </h2>
+            <p class="profile__about">Физик, програмист и вожатый</p>
           </div>
         </div>
         <button type="button" class="profile__add">
@@ -31,57 +28,45 @@
       </section>
       <section class="elements">
         <div class="element">
-          <img class="element__img" src="./images/Бауманска.jpg" alt="Бауманская станция">
+          <img class="element__img" src="./images/Бауманска.jpg" alt="Радуга после дождя возле Бауманской станции метро города Москвы">
           <div class="element__name">
-            <div class="element__text">
-             <p class="element__paragraph">Бауманска станция</p>
+             <h2 class="element__paragraph">Бауманска станция</h2>
               <button type="button" class="element__like"></button>
-            </div>
           </div>
         </div>
         <div class="element">
-          <img class="element__img" src="./images/Общага.jpg" alt="Общежитие">
+          <img class="element__img" src="./images/Общага.jpg" alt="чернобелая фотография лица крупным план во время игры в настольные игры">
           <div class="element__name">
-            <div class="element__text">
-              <p class="element__paragraph">Общежитие</p>
+              <h2 class="element__paragraph">Общежитие</h2>
               <button type="button" class="element__like"></button>
-            </div>
           </div>
         </div>
         <div class="element">
-          <img class="element__img" src="./images/Деревня.jpg" alt="Деревня">
+          <img class="element__img" src="./images/Деревня.jpg" alt="Заснеженная ёлка по пути в глубинку России">
           <div class="element__name">
-            <div class="element__text">
-              <p class="element__paragraph">Деревня</p>
+              <h2 class="element__paragraph">Деревня</h2>
               <button type="button" class="element__like"></button>
-            </div>
           </div>
         </div>
         <div class="element">
-          <img class="element__img" src="./images/Челябиск.jpg" alt="Челябиск">
+          <img class="element__img" src="./images/Челябиск.jpg" alt="Посленовогодняя пурга в городе Челябиск">
           <div class="element__name">
-            <div class="element__text">
-              <p class="element__paragraph">Челябиск</p>
+              <h2 class="element__paragraph">Челябиск</h2>
               <button type="button" class="element__like"></button>
-            </div>
           </div>
         </div>
         <div class="element">
-          <img  class="element__img" src="./images/Новомих.jpg" alt="Новомихайловск">
+          <img  class="element__img" src="./images/Новомих.jpg" alt="Закат на пляже Новомихайловска">
           <div class="element__name">
-            <div class="element__text">
               <p class="element__paragraph">Новомихайловск</p>
               <button type="button" class="element__like"></button>
-            </div>
           </div>
         </div>
         <div class="element">
-          <img class="element__img" src="./images/Орленок.jpg" alt="Орленок">
+          <img class="element__img" src="./images/Орленок.jpg" alt="Вид на черное море с платного пляжа в ВДЦ Орленок">
           <div class="element__name">
-            <div class="element__text">
-              <p class="element__paragraph">Орленок</p>
+              <h2 class="element__paragraph">Орленок</h2>
               <button type="button" class="element__like"></button>
-            </div>
           </div>
         </div> 
       </section>
@@ -89,18 +74,17 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
-    <section class="popup">
-      <form class="popup__form">
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__name" placeholder="Ваше Имя">
-        <div class="line line_place_popup"></div>
-        <input class="popup__about" placeholder="Чем вы занимаетесь">
-        <div class="line line_place_popup"></div>
-        <button class="popup__save-button">Сохранить</button>
-      </form>
+    <div class="popup">
+      <div class="popup__form">
+        <form name="eidtProfile" method="post" class="popup__profile">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input class="popup__input" placeholder="Ваше Имя" id="popupName" name="popup__name">
+          <input class="popup__input" placeholder="Чем вы занимаетесь" id="popupAbout" name="popup__about">
+          <button type="submit" class="popup__save-button">Сохранить</button>
+        </form>
+      </div>
       <button type="button" class="popup__close-button"></button>
-    </section>
-  </div>
+    </div>
   <script src="./script/script.js"></script>
 </body>
 </html>

@@ -1,29 +1,23 @@
 let popup = document.querySelector('.popup');
-let ProfileChange = document.querySelector('.profile__change');
+let profileChange = document.querySelector('.profile__change');
 let popupClose = popup.querySelector('.popup__close-button');
-let ProfileName = document.querySelector('.profile__name');
-let ProfilAbout = document.querySelector('.profile__about');
-let nameInput = popup.querySelector('.popup__name');
-let aboutInput = popup.querySelector('.popup__about');
+let profileName = document.querySelector('.profile__name');
+let profilAbout = document.querySelector('.profile__about');
+let nameInput = document.querySelector('#popupName');
+let aboutInput = document.querySelector('#popupAbout');
 function ClosePopup(){  // функция для закрытия формы
-    popup.classList.remove('popup__opend');
+    popup.classList.remove('popup_opend');
 }
 function FormSubmit(evt) { //функция сохранения данных полученных от пользователя
     evt.preventDefault();
-    ProfileName.textContent = nameInput.value;
-    ProfilAbout.textContent = aboutInput.value;
+    profileName.textContent = nameInput.value;
+    profilAbout.textContent = aboutInput.value;
     ClosePopup();
 }
-ProfileChange.addEventListener('click', function(){ // открытие формы для изменения профиля
-    popup.classList.add('popup__opend');
-    nameInput.value = ProfileName.textContent;
-    aboutInput.value = ProfilAbout.textContent;
+profileChange.addEventListener('click', function(){ // открытие формы для изменения профиля
+    popup.classList.add('popup_opend');
+    nameInput.value = profileName.textContent;
+    aboutInput.value = profilAbout.textContent;
 })
 popupClose.addEventListener('click',ClosePopup ); //само закрытие формы
-nameInput.addEventListener('click',function(){
-    nameInput.value = ''; 
-} );
-aboutInput.addEventListener('click',function(){ //очистка данных формы при нажатии
-    aboutInput.value = '';
-} );
 popup.addEventListener('submit', FormSubmit); //перенос данных из формы в профиль

@@ -4,4 +4,8 @@
     border-bottom-right-radius: 10px;
     height: 79px;
     position: relative;
+    display: flex;
+    padding-left: 21px;
+    justify-content: space-between;
+    padding-right: 15px;
 }

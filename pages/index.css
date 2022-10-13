@@ -1,9 +1,9 @@
 @import url(../vendor/normalize.css);
-@import url(../fonts/inter.css);
+@import url(../vendor/fonts/inter.css);
 @import url(../blocks/page/page.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/logo/logo.css);
-@import url(../blocks/logo/_place/_header/logo_place_header.css);
+@import url(../blocks/logo/_place/logo_place_header.css);
 /* Стили для профиля */
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__about/profile__about.css);
@@ -23,18 +23,15 @@
 @import url(../blocks/element/__name/element__name.css);
 @import url(../blocks/element/__paragraph/element__paragraph.css);
 @import url(../blocks/element/__text/element__text.css);
-@import url(../blocks/line/line.css);
-@import url(../blocks/line/_place/_header/line_place_header.css);
-@import url(../blocks/line/_place/_popup/line_place_popup.css);
 /* стили для подвала */
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 /* стили для формы заполненияы */
 @import url(../blocks/popup/popup.css);
-@import url(../blocks/popup/__about/popup__about.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/popup/__form/popup__form.css);
-@import url(../blocks/popup/__name/popup__name.css);
-@import url(../blocks/popup/__opend/popup__opend.css);
+@import url(../blocks/popup/_opend/popup__opend.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__save-button/popup__save-button.css);
+@import url(../blocks/popup/__profile/popup__profile.css);
+@import url(../blocks/popup/__input/popup__input.css);
