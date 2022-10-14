@@ -8,7 +8,7 @@
     box-sizing: border-box;
     padding: 0;
     background-color: transparent;
-    cursor: pointer
+    cursor: pointer;
 }
 .profile__change:hover{
     opacity: 0.6;
