@@ -27,64 +27,47 @@
         </button>
       </section>
       <section class="elements">
-        <div class="element">
-          <img class="element__img" src="./images/Бауманска.jpg" alt="Радуга после дождя возле Бауманской станции метро города Москвы">
-          <div class="element__name">
-             <h2 class="element__paragraph">Бауманска станция</h2>
-              <button type="button" class="element__like"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__img" src="./images/Общага.jpg" alt="чернобелая фотография лица крупным план во время игры в настольные игры">
-          <div class="element__name">
-              <h2 class="element__paragraph">Общежитие</h2>
-              <button type="button" class="element__like"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__img" src="./images/Деревня.jpg" alt="Заснеженная ёлка по пути в глубинку России">
-          <div class="element__name">
-              <h2 class="element__paragraph">Деревня</h2>
-              <button type="button" class="element__like"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__img" src="./images/Челябиск.jpg" alt="Посленовогодняя пурга в городе Челябиск">
-          <div class="element__name">
-              <h2 class="element__paragraph">Челябиск</h2>
-              <button type="button" class="element__like"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img  class="element__img" src="./images/Новомих.jpg" alt="Закат на пляже Новомихайловска">
-          <div class="element__name">
-              <p class="element__paragraph">Новомихайловск</p>
-              <button type="button" class="element__like"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__img" src="./images/Орленок.jpg" alt="Вид на черное море с платного пляжа в ВДЦ Орленок">
-          <div class="element__name">
-              <h2 class="element__paragraph">Орленок</h2>
-              <button type="button" class="element__like"></button>
-          </div>
-        </div> 
+      
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
     <div class="popup">
-      <div class="popup__form">
+      <div class="popup__form emerging" id ="popupProf">
         <form name="eidtProfile" method="post" class="popup__profile">
           <h2 class="popup__title">Редактировать профиль</h2>
           <input class="popup__input" placeholder="Ваше Имя" id="popupName" name="popup__name">
           <input class="popup__input" placeholder="Чем вы занимаетесь" id="popupAbout" name="popup__about">
-          <button type="submit" class="popup__save-button">Сохранить</button>
+          <button type="submit" class="popup__save-button" id="saveProfile">Сохранить</button>
         </form>
+      </div>
+      <div class="popup__form emerging" id="popupPlace">
+        <form name="eidtProfile" method="post" class="popup__profile">
+          <h2 class="popup__title">Новое место</h2>
+          <input class="popup__input" placeholder="Название" id="popupPost" name="popup__place">
+          <input class="popup__input" placeholder="Ссылка на картинку" id="popupLink" name="popup__link">
+          <button type="submit" class="popup__save-button" id="newPlace">Создать</button>
+        </form>
+      </div>
+      <div class="popup__view emerging" id="popupView">
+        <img class="popup__img" id="viewImg">
+        <p class="popup__caption"></p>
       </div>
       <button type="button" class="popup__close-button"></button>
     </div>
+    <template id="element">
+      <div class="element">
+        <button class="element__img-popup">
+          <img class="element__img">
+        </button>
+        <button type="button" class="element__delete" ></button>
+        <div class="element__name">
+          <h2 class="element__paragraph"></h2>
+          <button type="button" class="element__like"></button>
+        </div>
+      </div>
+    </template>
   <script src="./script/script.js"></script>
 </body>
 </html>
