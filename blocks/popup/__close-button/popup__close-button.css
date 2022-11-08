@@ -1,15 +1,15 @@
 .popup__close-button{
     background-image: url(../../../images/Close__Icon.svg);
-    grid-column-start: 4;
-    grid-column-end: 5;
     width: 32px;
     height: 32px;
-    grid-row-start: 2;
-    grid-row-end: 3;
     border: 0;
     padding: 0;
     background-color: transparent;
     cursor: pointer;
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 3;
 }
 .popup__close-button:hover{
     opacity: 0.6;

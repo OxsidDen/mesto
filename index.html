@@ -27,14 +27,13 @@
         </button>
       </section>
       <section class="elements">
-      
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
-    <div class="popup">
-      <div class="popup__form emerging" id ="popupProf">
+    <div class="popup" id ="popupProf">
+      <div class="popup__form emerging" id ="formProf">
         <form name="eidtProfile" method="post" class="popup__profile">
           <h2 class="popup__title">Редактировать профиль</h2>
           <input class="popup__input" placeholder="Ваше Имя" id="popupName" name="popup__name">
@@ -42,15 +41,21 @@
           <button type="submit" class="popup__save-button" id="saveProfile">Сохранить</button>
         </form>
       </div>
-      <div class="popup__form emerging" id="popupPlace">
+      <button type="button" class="popup__close-button"></button>
+    </div>
+    <div class="popup" id="popupPlace">
+      <div class="popup__form emerging" id="formPlace">
         <form name="eidtProfile" method="post" class="popup__profile">
           <h2 class="popup__title">Новое место</h2>
           <input class="popup__input" placeholder="Название" id="popupPost" name="popup__place">
           <input class="popup__input" placeholder="Ссылка на картинку" id="popupLink" name="popup__link">
           <button type="submit" class="popup__save-button" id="newPlace">Создать</button>
         </form>
-      </div>
-      <div class="popup__view emerging" id="popupView">
+      </div>      
+      <button type="button" class="popup__close-button"></button>
+    </div>
+    <div class="popup popup_view-place" id="popupView">
+      <div class="popup__view emerging" id="formView">
         <img class="popup__img" id="viewImg">
         <p class="popup__caption"></p>
       </div>
