@@ -3,7 +3,6 @@
     grid-column-end: 4;
     grid-row-start: 3;
     grid-row-end: 5;
-    display: none;
 }
 @media screen and (min-width: 320px) and (max-width: 609px) {
     .popup__view{

@@ -61,10 +61,9 @@ function createCard(item) {
     });
     elementView.addEventListener('click', () => {
         openPopup(popupView);
-        openPopup(formView);
-        
         popupImg.src = elementImg.src;
         popupCaption.textContent = elementParagraph.textContent;
+        popupImg.alt = elementParagraph.textContent;
     });
     return element;
 };
@@ -91,7 +90,6 @@ function saveSubmitProfile(evt) { //функция сохранения данн
     profileName.textContent = nameInput.value;
     profilAbout.textContent = aboutInput.value;
     closePopup(popupProfile);
-    closePopup(formProfile);
 };
 
 function saveSubmitPlace(evt) { //функция сохранения данных полученных от пользователя
@@ -103,12 +101,10 @@ function saveSubmitPlace(evt) { //функция сохранения данны
         };
     renderCard(newCards);
     }
-    closePopup(formPlace);
     closePopup(popupPlace);
 };
 
 profileChange.addEventListener('click', function(){ // открытие формы для изменения профиля
-    openPopup(formProfile);
     openPopup(popupProfile);
     nameInput.value = profileName.textContent;
     aboutInput.value = profilAbout.textContent;
@@ -116,7 +112,6 @@ profileChange.addEventListener('click', function(){ // открытие форм
 
 profileAdd.addEventListener('click', function(){ // открытие формы для добовлания постов
     openPopup(popupPlace);
-    openPopup(formPlace);
 });
 
 popupClose.forEach((pop) => {
