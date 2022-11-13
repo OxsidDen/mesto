@@ -31,15 +31,19 @@
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 /* стили для формы заполненияы */
 @import url(../blocks/popup/popup.css);
-@import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/popup/__view/popup__view.css);
 @import url(../blocks/popup/_view-place/popup_view-place.css);
 @import url(../blocks/popup/__img/popup__img.css);
-@import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/_opend/popup_opend.css);
-@import url(../blocks/popup/__title/popup__title.css);
-@import url(../blocks/popup/__save-button/popup__save-button.css);
-@import url(../blocks/popup/__profile/popup__profile.css);
-@import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__caption/popup__caption.css);
+@import url(../blocks/popup/__close-button/popup__close-button.css);
 
+
+@import url(../blocks/form/__input-error/form__input-error.css);
+@import url(../blocks/form/__input-error/_able/form__input-error_able.css);
+@import url(../blocks/form/__save-button/form__save-button.css);
+@import url(../blocks/form/form.css);
+@import url(../blocks/form/__title/form__title.css);
+@import url(../blocks/form/__input/form__input.css);
+@import url(../blocks/form/__input/_error/form__input_error.css);
+@import url(../blocks/form/__save-button/_disable/form__save-button_disable.css);
