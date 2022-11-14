@@ -8,6 +8,7 @@ const formView = popupView.querySelector('#formView'); // попап для пр
 const profileChange = document.querySelector('.profile__change'); // кнопка для изменения профиля
 const profileAdd = document.querySelector('.profile__add'); // кнопка для добавления поста
 const popupCloseArray = Array.from(document.querySelectorAll('.popup__close-button')); // кнопка закрытия попапа
+const saveNewPlace = document.querySelector('#newPlace');
 const profileName = document.querySelector('.profile__name'); // Имя в профиля
 const profilAbout = document.querySelector('.profile__about'); // Род деятельности в профиле
 const nameInput = formProfile.querySelector('#form__name'); // Инпут для имени
@@ -44,7 +45,8 @@ const firstCards =[
         link: './images/Орленок.jpg'
     }
 ];
-function createCard(item, config) {
+console.log(saveNewPlace)
+function createCard(item) {
     const element = elementTemplate.querySelector('.element').cloneNode(true);
     const elementParagraph = element.querySelector('.element__paragraph'); // выбор элементов нового поста
     const elementImg = element.querySelector('.element__img');
@@ -78,11 +80,12 @@ firstCards.forEach(renderCard);// Добавление карточек с по�
 
 function closePopup(elem){  // функция для закрытия формы
     elem.classList.remove('popup_opend');
+    document.removeEventListener('keydown', closePopupByEsc);
 };
 
 function openPopup(elem){
     elem.classList.add('popup_opend');
-
+    document.addEventListener('keydown', closePopupByEsc);
 };
 
 function saveSubmitProfile(evt) { //функция сохранения данных полученных от пользователя при изменении профиля
@@ -104,7 +107,12 @@ const saveSubmitPlace = (evt) => { //функция сохранения дан�
     closePopup(popupPlace);
 };
 
-
+const closePopupByEsc = (evt) => {
+    if(evt.key === "Escape"){
+        const popupOpened = document.querySelector('.popup_opend');
+        closePopup(popupOpened);
+    }
+}
 profileChange.addEventListener('click', function(){ // открытие формы для изменения профиля
     openPopup(popupProfile);
     nameInput.value = profileName.textContent;
@@ -113,6 +121,9 @@ profileChange.addEventListener('click', function(){ // открытие форм
 
 profileAdd.addEventListener('click', function(){ // открытие формы для добовлания постов
     openPopup(popupPlace);
+    disableButton( saveNewPlace, 'form__save-button_disable');
+    placeName.value = "";
+    placeLink.value ="";
 });
 
 popupCloseArray.forEach((pop) => {
@@ -122,12 +133,6 @@ popupCloseArray.forEach((pop) => {
     }); //само закрытие формы
 });
 
-document.addEventListener('keydown', (e) =>{
-    if(e.key === "Escape"){
-        const popupOpened = document.querySelector('.popup_opend');
-        closePopup(popupOpened);
-    }
-});
 
 popupArray.forEach((pop) => {
     const childElement = pop.firstElementChild;
