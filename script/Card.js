@@ -19,11 +19,11 @@ export class Card {
     }
 
     _likePost(){
-        this.elementLike.classList.toggle('element__like_active');
+        this._elementLike.classList.toggle('element__like_active');
     }
 
     _deletPost(){
-        this.elementDelete.parentNode.remove();
+        this._elementDelete.closest.remove();
     }
 
     _viewImage(){
@@ -31,24 +31,24 @@ export class Card {
     }
 
     _setListener(){
-        this.elementLike.addEventListener('click', () => this._likePost())
-        this.elementDelete.addEventListener('click', () => this._deletPost() )
-        this.elementView.addEventListener('click', () => this._viewImage() )
+        this._elementLike.addEventListener('click', () => this._likePost())
+        this._elementDelete.addEventListener('click', () => this._deletPost() )
+        this._elementView.addEventListener('click', () => this._viewImage() )
 
     }
 
     renderCard(){
         this._card = this._getTemplate(this._template);
-        this.elementParagraph = this._card.querySelector('.element__paragraph'); // выбор элементов нового поста
-        this.elementImg = this._card.querySelector('.element__img');
-        this.elementDelete = this._card.querySelector('.element__delete');
-        this.elementLike = this._card.querySelector('.element__like');
-        this.elementView = this._card.querySelector('.element__img-popup')
+        this._elementParagraph = this._card.querySelector('.element__paragraph'); // выбор элементов нового поста
+        this._elementImg = this._card.querySelector('.element__img');
+        this._elementDelete = this._card.querySelector('.element__delete');
+        this._elementLike = this._card.querySelector('.element__like');
+        this._elementView = this._card.querySelector('.element__img-popup')
 
         
-        this.elementParagraph .textContent = this._title;
-        this.elementImg.src = this._link;
-        this.elementImg.alt = this._title;
+        this._elementParagraph .textContent = this._title;
+        this._elementImg.src = this._link;
+        this._elementImg.alt = this._title;
 
         this._setListener();
 

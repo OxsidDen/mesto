@@ -1,12 +1,12 @@
 export class FormValidation {
 
-    constructor(form){
-        this.form = document.querySelector(form);
-        this.errorInputClass = "form__input_error";
-        this.errorTextClass = "form__input-error_able";
-        this.saveButtonSelector = ".form__save-button";
-        this.saveButtonDisableClass = "form__save-button_disable";
-        this.inputSelector = ".form__input";
+    constructor(selector, form){
+        this._form = form;
+        this._errorInputClass =  selector.errorInputClass;
+        this._errorTextClass =  selector.errorTextClass;
+        this._saveButtonSelector = form.querySelector(selector.saveButtonSelector);
+        this._saveButtonDisableClass =  selector.saveButtonDisableClass;
+        this._inputSelectors = form.querySelectorAll(selector.inputSelector);
     }
 
     _hideError( inputEl, errorEl, errorInputClass, errorTextClass ){
@@ -55,25 +55,24 @@ export class FormValidation {
         }
     }
 
-    _setEventListeners(formEl, errorInputClass, errorTextClass, saveButtonSelector, saveButtonDisableClass, inputSelector){
-        const inputArray = Array.from(formEl.querySelectorAll(inputSelector));
-        const buttonEl = formEl.querySelector(saveButtonSelector);
-        this._disableButton(buttonEl, saveButtonDisableClass);
+    _setEventListeners(formEl, errorInputClass, errorTextClass, saveButtonSelector, saveButtonDisableClass){
+        const inputArray = Array.from( this._inputSelectors);
+        this._disableButton( this._saveButtonSelector, saveButtonDisableClass);
         inputArray.forEach((inputEl) => {
             inputEl.addEventListener('input', () => {
                 this._testValid(formEl, inputEl, errorInputClass, errorTextClass);
-                this._switchButton(inputArray, buttonEl, saveButtonDisableClass);
+                this._switchButton(inputArray,  this._saveButtonSelector, saveButtonDisableClass);
             });
         });
     }
 
-    _enableValid(){
-        this.form.addEventListener('submit', (evt) => {
+    enableValidation(){
+        this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
         });
-        this._setEventListeners(this.form, this.errorInputClass, 
-            this.errorTextClass, this.saveButtonSelector,
-            this.saveButtonDisableClass, this.inputSelector);
+        this._setEventListeners(this._form, this._errorInputClass, 
+            this._errorTextClass, this._saveButtonSelector,
+            this._saveButtonDisableClass);
         
     }
 }

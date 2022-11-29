@@ -1,6 +1,7 @@
 import {data} from './Data.js';
 import {Card} from './Card.js';
 import { FormValidation } from './FormValidation.js';
+import { selector } from './selectorValid.js';
 const popupArray = Array.from(document.querySelectorAll('.popup'));
 const popupProfile = document.querySelector('#popupProf'); // попап для изменения профиля
 const popupPlace = document.querySelector('#popupPlace'); // попап для добавления нового поста
@@ -9,36 +10,42 @@ const formProfile = popupProfile.querySelector('#formProf'); // попап дл�
 const formPlace = popupPlace.querySelector('#formPlace'); // попап для просмотра постов 
 const formView = popupView.querySelector('#formView'); // попап для просмотра постов 
 const profileChange = document.querySelector('.profile__change'); // кнопка для изменения профиля
-const profileAdd = document.querySelector('.profile__add'); // кнопка для добавления поста
-const popupCloseArray = Array.from(document.querySelectorAll('.popup__close-button')); // кнопка закрытия попапа
-const saveNewPlace = document.querySelector('#newPlace');
+const placeAdd = document.querySelector('.profile__add'); // кнопка для добавления поста
+const buttonCloseArray = Array.from(document.querySelectorAll('.popup__close-button')); // кнопка закрытия попапа
 const profileName = document.querySelector('.profile__name'); // Имя в профиля
 const profilAbout = document.querySelector('.profile__about'); // Род деятельности в профиле
+const saveProfileButton = formProfile.querySelector("#saveProfile");
 const nameInput = formProfile.querySelector('#form__name'); // Инпут для имени
 const aboutInput = formProfile.querySelector('#form__about'); // Инпут для деятельности
 const placeName = formPlace.querySelector('#form__place'); // Инпут для названия нового поста
 const placeLink = formPlace.querySelector('#form__link'); // Инпут для ссылки на новый пост
+const newPLaceButton = formPlace.querySelector("#newPlace");
 const popupImg = formView.querySelector('#viewImg'); // Увеличенная картинка в попапе
 const popupCaption = formView.querySelector('.popup__caption'); // Описание карнки в попапе
 const elements = document.querySelector('.elements'); // Отсек со всеми постами
-const formPlaceValid = new FormValidation("#formPlace");
-const formProfileValid = new FormValidation("#formProf");
-function renderCard(elementUnit){
+const formPlaceValid = new FormValidation(selector, formPlace);
+formPlaceValid.enableValidation();
+const formProfileValid = new FormValidation(selector, formProfile);
+formProfileValid.enableValidation();
+
+function createCard(elementUnit) {
     const card = new Card(elementUnit, 
         (data) => {
             openPopup(popupView);
             popupImg.src = data.link;
             popupCaption.textContent = data.name;
-            popupImg.alt = data.name;  
+            popupImg.alt = data.name;
         }, "#templateCard");
-    const cardElement = card.renderCard();
+        const cardElement = card.renderCard();
+        return cardElement;
+    };
 
+function renderCard(elementUnit){
+    const cardElement = createCard(elementUnit);
     elements.prepend(cardElement);
 };
 
-data.forEach((item) => {
-    renderCard(item);
-});
+data.forEach(renderCard);
 
 function closePopup(elem){  // функция для закрытия формы
     elem.classList.remove('popup_opend');
@@ -79,19 +86,19 @@ profileChange.addEventListener('click', function(){ // открытие форм
     openPopup(popupProfile);
     nameInput.value = profileName.textContent;
     aboutInput.value = profilAbout.textContent;
-    formProfileValid._enableValid();
+    formPlaceValid._disableButton(saveProfileButton, selector.saveButtonDisableClass)
 });
 
-profileAdd.addEventListener('click', function(){ // открытие формы для добовлания постов
+placeAdd.addEventListener('click', function(){ // открытие формы для добовлания постов
     openPopup(popupPlace);
     placeName.value = "";
     placeLink.value ="";
-    formPlaceValid._enableValid();
+    formPlaceValid._disableButton(newPLaceButton, selector.saveButtonDisableClass)
 });
 
-popupCloseArray.forEach((pop) => {
-    const popupOpened = pop.closest("div");
-    pop.addEventListener('click', () => {
+buttonCloseArray.forEach((button) => {
+    const popupOpened = button.closest(".popup");
+    button.addEventListener('click', () => {
         closePopup(popupOpened);
     }); //само закрытие формы
 });
@@ -99,7 +106,7 @@ popupCloseArray.forEach((pop) => {
 
 popupArray.forEach((pop) => {
     const childElement = pop.firstElementChild;
-    pop.addEventListener('click', (evt) =>{
+    pop.addEventListener('mousedown', (evt) =>{
         if(!(evt.target == childElement || childElement.contains(evt.target))){
             closePopup(pop);
         }
