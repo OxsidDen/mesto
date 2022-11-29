@@ -1,3 +1,6 @@
+import {data} from './Data.js';
+import {Card} from './Card.js';
+import { FormValidation } from './FormValidation.js';
 const popupArray = Array.from(document.querySelectorAll('.popup'));
 const popupProfile = document.querySelector('#popupProf'); // попап для изменения профиля
 const popupPlace = document.querySelector('#popupPlace'); // попап для добавления нового поста
@@ -17,66 +20,25 @@ const placeName = formPlace.querySelector('#form__place'); // Инпут для 
 const placeLink = formPlace.querySelector('#form__link'); // Инпут для ссылки на новый пост
 const popupImg = formView.querySelector('#viewImg'); // Увеличенная картинка в попапе
 const popupCaption = formView.querySelector('.popup__caption'); // Описание карнки в попапе
-const elementTemplate = document.querySelector('#element').content; // Получение элементов из Template
 const elements = document.querySelector('.elements'); // Отсек со всеми постами
-const firstCards =[
-    {
-        name: 'Бауманска станция',
-        link: './images/Бауманска.jpg'
-    },
-    {
-        name: 'Общежитие',
-        link: './images/Общага.jpg'
-    },
-    {
-        name: 'Деревня',
-        link: './images/Деревня.jpg'
-    },
-    {
-        name: 'Челябинск',
-        link: './images/Челябиск.jpg'
-    },
-    {
-        name: 'Новомихайловск',
-        link: './images/Новомих.jpg'
-    },
-    {
-        name: 'Орленок',
-        link: './images/Орленок.jpg'
-    }
-];
-console.log(saveNewPlace)
-function createCard(item) {
-    const element = elementTemplate.querySelector('.element').cloneNode(true);
-    const elementParagraph = element.querySelector('.element__paragraph'); // выбор элементов нового поста
-    const elementImg = element.querySelector('.element__img');
-    const elementDelete = element.querySelector('.element__delete');
-    const elementLike = element.querySelector('.element__like');
-    const elementView = element.querySelector('.element__img-popup')
-    elementParagraph.textContent = item.name;
-    elementImg.src = item.link;
-    elementImg.alt = item.name;
-    elementLike.addEventListener('click', () => { // Присвоение слушателей к новому посту
-        elementLike.classList.toggle('element__like_active');
-    });
-    elementDelete.addEventListener('click', () => {
-        elementDelete.parentNode.remove();
-    });
-    elementView.addEventListener('click', () => {
-        openPopup(popupView);
-        popupImg.src = elementImg.src;
-        popupCaption.textContent = elementParagraph.textContent;
-        popupImg.alt = elementParagraph.textContent;
-    });
-    return element;
-};
-
+const formPlaceValid = new FormValidation("#formPlace");
+const formProfileValid = new FormValidation("#formProf");
 function renderCard(elementUnit){
-    const card = createCard(elementUnit);
-    elements.prepend(card);
+    const card = new Card(elementUnit, 
+        (data) => {
+            openPopup(popupView);
+            popupImg.src = data.link;
+            popupCaption.textContent = data.name;
+            popupImg.alt = data.name;  
+        }, "#templateCard");
+    const cardElement = card.renderCard();
+
+    elements.prepend(cardElement);
 };
 
-firstCards.forEach(renderCard);// Добавление карточек с помощью Js 
+data.forEach((item) => {
+    renderCard(item);
+});
 
 function closePopup(elem){  // функция для закрытия формы
     elem.classList.remove('popup_opend');
@@ -85,7 +47,7 @@ function closePopup(elem){  // функция для закрытия формы
 
 function openPopup(elem){
     elem.classList.add('popup_opend');
-    document.addEventListener('keydown', closePopupByEsc);
+      document.addEventListener('keydown', closePopupByEsc);
 };
 
 function saveSubmitProfile(evt) { //функция сохранения данных полученных от пользователя при изменении профиля
@@ -117,13 +79,14 @@ profileChange.addEventListener('click', function(){ // открытие форм
     openPopup(popupProfile);
     nameInput.value = profileName.textContent;
     aboutInput.value = profilAbout.textContent;
+    formProfileValid._enableValid();
 });
 
 profileAdd.addEventListener('click', function(){ // открытие формы для добовлания постов
     openPopup(popupPlace);
-    disableButton( saveNewPlace, 'form__save-button_disable');
     placeName.value = "";
     placeLink.value ="";
+    formPlaceValid._enableValid();
 });
 
 popupCloseArray.forEach((pop) => {
@@ -143,5 +106,7 @@ popupArray.forEach((pop) => {
     });
 });
 
+
 popupProfile.addEventListener('submit', saveSubmitProfile); //перенос данных из формы в профиль
 popupPlace.addEventListener('submit',saveSubmitPlace); //перенос данных из формы в посты
+
