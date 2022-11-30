@@ -1,4 +1,4 @@
-export const selector = {
+export const selectors = {
     errorInputClass: "form__input_error" ,
     errorTextClass: "form__input-error_able" ,
     saveButtonSelector: ".form__save-button",

@@ -1,7 +1,7 @@
 import {data} from './Data.js';
 import {Card} from './Card.js';
 import { FormValidation } from './FormValidation.js';
-import { selector } from './selectorValid.js';
+import { selectors } from './selectorValid.js';
 const popupArray = Array.from(document.querySelectorAll('.popup'));
 const popupProfile = document.querySelector('#popupProf'); // попап для изменения профиля
 const popupPlace = document.querySelector('#popupPlace'); // попап для добавления нового поста
@@ -14,18 +14,16 @@ const placeAdd = document.querySelector('.profile__add'); // кнопка для
 const buttonCloseArray = Array.from(document.querySelectorAll('.popup__close-button')); // кнопка закрытия попапа
 const profileName = document.querySelector('.profile__name'); // Имя в профиля
 const profilAbout = document.querySelector('.profile__about'); // Род деятельности в профиле
-const saveProfileButton = formProfile.querySelector("#saveProfile");
 const nameInput = formProfile.querySelector('#form__name'); // Инпут для имени
 const aboutInput = formProfile.querySelector('#form__about'); // Инпут для деятельности
 const placeName = formPlace.querySelector('#form__place'); // Инпут для названия нового поста
 const placeLink = formPlace.querySelector('#form__link'); // Инпут для ссылки на новый пост
-const newPLaceButton = formPlace.querySelector("#newPlace");
 const popupImg = formView.querySelector('#viewImg'); // Увеличенная картинка в попапе
 const popupCaption = formView.querySelector('.popup__caption'); // Описание карнки в попапе
 const elements = document.querySelector('.elements'); // Отсек со всеми постами
-const formPlaceValid = new FormValidation(selector, formPlace);
+const formPlaceValid = new FormValidation(selectors, formPlace);
 formPlaceValid.enableValidation();
-const formProfileValid = new FormValidation(selector, formProfile);
+const formProfileValid = new FormValidation(selectors, formProfile);
 formProfileValid.enableValidation();
 
 function createCard(elementUnit) {
@@ -86,20 +84,19 @@ profileChange.addEventListener('click', function(){ // открытие форм
     openPopup(popupProfile);
     nameInput.value = profileName.textContent;
     aboutInput.value = profilAbout.textContent;
-    formPlaceValid._disableButton(saveProfileButton, selector.saveButtonDisableClass)
 });
 
 placeAdd.addEventListener('click', function(){ // открытие формы для добовлания постов
     openPopup(popupPlace);
     placeName.value = "";
     placeLink.value ="";
-    formPlaceValid._disableButton(newPLaceButton, selector.saveButtonDisableClass)
+    formPlaceValid.disableButton();
 });
 
 buttonCloseArray.forEach((button) => {
-    const popupOpened = button.closest(".popup");
+    const popup = button.closest(".popup");
     button.addEventListener('click', () => {
-        closePopup(popupOpened);
+        closePopup(popup);
     }); //само закрытие формы
 });
 

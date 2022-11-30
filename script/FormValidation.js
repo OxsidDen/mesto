@@ -1,67 +1,66 @@
 export class FormValidation {
 
-    constructor(selector, form){
+    constructor(selectors, form){
         this._form = form;
-        this._errorInputClass =  selector.errorInputClass;
-        this._errorTextClass =  selector.errorTextClass;
-        this._saveButtonSelector = form.querySelector(selector.saveButtonSelector);
-        this._saveButtonDisableClass =  selector.saveButtonDisableClass;
-        this._inputSelectors = form.querySelectorAll(selector.inputSelector);
+        this._errorInputClass =  selectors.errorInputClass;
+        this._errorTextClass =  selectors.errorTextClass;
+        this._saveButton = form.querySelector(selectors.saveButtonSelector);
+        this._saveButtonDisableClass =  selectors.saveButtonDisableClass;
+        this._inputList = Array.from(form.querySelectorAll(selectors.inputSelector));
     }
 
-    _hideError( inputEl, errorEl, errorInputClass, errorTextClass ){
-        inputEl.classList.remove(errorInputClass);
+    _hideError( inputEl, errorEl ){
+        inputEl.classList.remove(this._errorInputClass);
         errorEl.textContent = '';
-        errorEl.classList.remove(errorTextClass);
+        errorEl.classList.remove(this._errorTextClass);
     }
 
-    _showError( inputEl,errorEl, errorReport, errorInputClass, errorTextClass ){
-        inputEl.classList.add(errorInputClass);
+    _showError( inputEl,errorEl, errorReport ){
+        inputEl.classList.add(this._errorInputClass);
         errorEl.textContent = errorReport;
-        errorEl.classList.add(errorTextClass);
+        errorEl.classList.add(this._errorTextClass);
     }
 
-    _testValid(formEl, inputEl, errorInputClass, errorTextClass){
-        const errorEl = formEl.querySelector(`.${inputEl.id}-error`);
+    _testValid(inputEl){
+        const errorEl = this._form.querySelector(`.${inputEl.id}-error`);
         if (!inputEl.validity.valid) {
-            this._showError( inputEl, errorEl, inputEl.validationMessage, errorInputClass, errorTextClass);
+            this._showError(inputEl, errorEl, inputEl.validationMessage);
         } else {
-            this._hideError( inputEl, errorEl, errorInputClass, errorTextClass);
+            this._hideError(inputEl, errorEl);
         }
     }
 
-    _hasInvalidInput(inputArray){
-        return inputArray.some((inputEl) => {
+    _hasInvalidInput(){
+        return this._inputList.some((inputEl) => {
             return !inputEl.validity.valid;
         });
     }
 
-    _enableButton(buttonEl, saveButtonDisableClass){
-        buttonEl.classList.remove(saveButtonDisableClass);
-        buttonEl.disabled = false;
+    _enableButton(){
+        this._saveButton.classList.remove(this._saveButtonDisableClass);
+        this._saveButton.disabled = false;
     }
 
-    _disableButton(buttonEl, saveButtonDisableClass){
-        buttonEl.classList.add(saveButtonDisableClass);
-        buttonEl.disabled = true;
+    disableButton(){
+        this._saveButton.classList.add(this._saveButtonDisableClass);
+        this._saveButton.disabled = true;
     }
 
-    _switchButton(inputArray, buttonEl, saveButtonDisableClass){
-        if (this._hasInvalidInput(inputArray)) {
-            this._disableButton(buttonEl, saveButtonDisableClass);
+    _switchButton(){
+        if (this._hasInvalidInput()) {
+            this.disableButton();
         }
         else {
-            this._enableButton(buttonEl, saveButtonDisableClass);
+            this._enableButton();
         }
     }
 
-    _setEventListeners(formEl, errorInputClass, errorTextClass, saveButtonSelector, saveButtonDisableClass){
-        const inputArray = Array.from( this._inputSelectors);
-        this._disableButton( this._saveButtonSelector, saveButtonDisableClass);
-        inputArray.forEach((inputEl) => {
+    _setEventListeners(){
+        this.disableButton();
+        this._inputList.forEach((inputEl) => {
             inputEl.addEventListener('input', () => {
-                this._testValid(formEl, inputEl, errorInputClass, errorTextClass);
-                this._switchButton(inputArray,  this._saveButtonSelector, saveButtonDisableClass);
+                this._testValid(inputEl);
+                this._switchButton();
             });
         });
     }
@@ -70,9 +69,7 @@ export class FormValidation {
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
         });
-        this._setEventListeners(this._form, this._errorInputClass, 
-            this._errorTextClass, this._saveButtonSelector,
-            this._saveButtonDisableClass);
+        this._setEventListeners();
         
     }
 }

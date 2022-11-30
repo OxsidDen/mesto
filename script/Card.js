@@ -23,7 +23,7 @@ export class Card {
     }
 
     _deletPost(){
-        this._elementDelete.closest.remove();
+        this._card.remove();
     }
 
     _viewImage(){
