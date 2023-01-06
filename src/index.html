@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link href="./pages/index.css" rel="stylesheet" > 
 </head>
 <body class="page">
     <header class="header">
@@ -13,17 +12,17 @@
     <main>
       <section class="profile">
         <div class="profile__personal">
-          <img src="./images/profile.jpg" alt="Фото профиля" class="profile__photo">
+          <img src="<%=require('./images/profile.jpg')%>" alt="Фото профиля" class="profile__photo">
           <div class="profile__info">
             <h1 class="profile__name">Денис Хажеев</h1>
             <button type="button" class="profile__change">
-              <img src="./images/pen.svg" alt="Изменить профиль">
+              <img src="<%=require('./images/pen.svg')%>" alt="Изменить профиль">
             </button>
             <p class="profile__about">Физик, программист и вожатый</p>
           </div>
         </div>
         <button type="button" class="profile__add">
-          <img src="./images/plus.svg" alt="Кнопка добавить" class="profile__plus">
+          <img src="<%=require('./images/plus.svg')%>" alt="Кнопка добавить" class="profile__plus">
         </button>
       </section>
       <section class="elements">
@@ -73,6 +72,5 @@
         </div>
       </div>
     </template>
-  <script src="./script/script.js" type="module" ></script>
 </body>
 </html>

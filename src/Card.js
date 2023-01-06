@@ -1,11 +1,12 @@
 export class Card {
 
-    constructor(data, openPop, template){
+    constructor(data, handleCardClick, template){
         this._data = data;
         this._title = data.name;
         this._link = data.link;
-        this._openPop = openPop;
+        this._openPop = handleCardClick;
         this._template = template;
+
     }
 
     _getTemplate(template){
