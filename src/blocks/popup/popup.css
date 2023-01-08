@@ -1,5 +1,5 @@
 .popup{
-    display: none;
+    display: grid;
     position: fixed;
     height: 100%;
     width: 100%;
@@ -11,8 +11,10 @@
     grid-template-columns: 1fr 32px auto 32px 1fr;
     grid-template-rows: 1fr auto auto 32px 1fr;
     align-items: center;
-    justify-content: center;
     gap: 8px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.4s,opacity 0.4s linear;
 }
 @media screen and (min-width: 320px) and (max-width: 609px) {
     .popup{

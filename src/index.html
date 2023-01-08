@@ -32,7 +32,7 @@
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
     <div class="popup" id ="popupProf">
-      <form class="form emerging" id ="formProf" name="eidtProfile" method="post" novalidate>
+      <form class="form " id ="formProf" name="eidtProfile" method="post" novalidate>
         <h2 class="form__title">Редактировать профиль</h2>
           <input class="form__input" placeholder="Ваше Имя" id="form__name" name="form__name" required type="text" minlength="2" maxlength="40">
           <span class="form__input-error form__name-error"></span>
@@ -40,10 +40,10 @@
           <span class="form__input-error form__about-error"></span>
           <button type="submit" class="form__save-button" id="saveProfile" disabled>Сохранить</button>
       </form>
-      <button type="button" class="popup__close-button emerging"></button>
+      <button type="button" class="popup__close-button "></button>
     </div>
     <div class="popup" id="popupPlace">
-      <form class="form emerging" id="formPlace" name="card-form" method="post" novalidate>
+      <form class="form " id="formPlace" name="card-form" method="post" novalidate>
         <h2 class="form__title">Новое место</h2>
         <input class="form__input" placeholder="Название" id="form__place" name="form__place" required type="text" minlength="2" maxlength="30">
         <span class="form__input-error form__place-error"></span>
@@ -51,14 +51,14 @@
         <span class="form__input-error form__link-error"></span>
         <button type="submit" class="form__save-button" id="newPlace" disabled>Создать</button>
       </form>      
-      <button type="button" class="popup__close-button emerging"></button>
+      <button type="button" class="popup__close-button "></button>
     </div>
     <div class="popup popup_view-place" id="popupView">
-      <div class="popup__view emerging" id="formView">
+      <div class="popup__view " id="formView">
         <img class="popup__img" id="viewImg">
         <p class="popup__caption"></p>
       </div>
-      <button type="button" class="popup__close-button emerging"></button>
+      <button type="button" class="popup__close-button "></button>
     </div>
     <template id="templateCard">
       <div class="element">

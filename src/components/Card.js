@@ -4,8 +4,8 @@ export class Card {
         this._data = data;
         this._title = data.name;
         this._link = data.link;
-        this._openPop = handleCardClick;
-        this._template = template;
+        this._openPopup = handleCardClick;
+        this._templateSelector = template;
 
     }
 
@@ -28,18 +28,18 @@ export class Card {
     }
 
     _viewImage(){
-       this._openPop(this._data);
+       this._openPopup(this._data);
     }
 
     _setListener(){
         this._elementLike.addEventListener('click', () => this._likePost())
-        this._elementDelete.addEventListener('click', () => this._deletPost() )
+        this._elementDelete.addEventListener('click', () => this._deletPost())
         this._elementView.addEventListener('click', () => this._viewImage() )
 
     }
 
     renderCard(){
-        this._card = this._getTemplate(this._template);
+        this._card = this._getTemplate(this._templateSelector);
         this._elementParagraph = this._card.querySelector('.element__paragraph'); // выбор элементов нового поста
         this._elementImg = this._card.querySelector('.element__img');
         this._elementDelete = this._card.querySelector('.element__delete');
