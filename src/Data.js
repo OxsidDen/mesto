@@ -4,7 +4,6 @@ import vilageImg from './images/Деревня.jpg';
 import chelyabiskImg from './images/Челябиск.jpg';
 import novomihImg from './images/Новомих.jpg';
 import orlenokImg from './images/Орленок.jpg';
-
 export const data =[
     {
         name: 'Бауманска станция',

@@ -3,8 +3,6 @@ import {Card} from '../components/Card.js';
 import './index.css';
 import { FormValidation } from '../components/FormValidation.js';
 import {
-    popupProfile,
-    popupPlace,
     formProfile,
     formPlace,
     profileChange,
