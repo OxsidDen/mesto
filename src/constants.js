@@ -1,5 +1,6 @@
 export const popupProfile = document.querySelector('#popupProf'); // попап для изменения профиля
 export const popupPlace = document.querySelector('#popupPlace'); // попап для добавления нового поста
+export const formEditAvatar = document.querySelector('#formEditAvatar')
 export const formProfile = popupProfile.querySelector('#formProf'); // попап для просмотра постов 
 export const formPlace = popupPlace.querySelector('#formPlace'); // попап для просмотра постов 
 export const profileChange = document.querySelector('.profile__change'); // кнопка для изменения профиля
@@ -15,8 +16,23 @@ export const selectors = {
 };
 export const popupProfSelector = '#popupProf';
 export const popupPlaceSelector = '#popupPlace';
+export const popupAvatarSelector = '#popupEditAvatar'
 export const templateSelector = "#templateCard";
 export const profNameSelector = ".profile__name";
 export const profAboutSelector = ".profile__about";
 export const popupViewSelector = "#popupView";
 export const elementSelector = '.elements';
+export const avatar = document.querySelector(".profile__photo")
+export const profileName = document.querySelector(profNameSelector);
+export const profileAbout = document.querySelector(profAboutSelector);
+export const sectionElements = document.querySelector('.elements');
+export const popupDeletSelector = '#popupDelet';
+export const aceptButton = document.querySelector('#deletPlace');
+export const avaterChange = document.querySelector(".profile__photo-edit")
+export const avatarLink = formEditAvatar.querySelector(".form__input")
+export const buttonText = {
+    save: "Сохранить",
+    saving: "Сохранение",
+    create: "Создать",
+    creating: "Создание",
+}

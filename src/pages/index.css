@@ -13,11 +13,15 @@
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__personal/profile__personal.css);
 @import url(../blocks/profile/__photo/profile__photo.css);
+@import url(../blocks/profile/__photo-edit/profile__photo-edit.css);
 @import url(../blocks/profile/__plus/profile__plus.css);
 /* Стили для ленты фотграфий */
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/element/element.css);
 @import url(../blocks/element/__delete/element__delete.css);
+@import url(../blocks/element/__delete/_visible/element__delete_visible.css);
+@import url(../blocks/element/__like-zone/element__like-zone.css);
+@import url(../blocks/element/__counter/element__counter.css);
 @import url(../blocks/element/__img/element__img.css);
 @import url(../blocks/element/__like/element__like.css);
 @import url(../blocks/element/__like/_active/element__like_active.css);

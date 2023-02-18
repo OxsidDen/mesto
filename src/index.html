@@ -12,13 +12,14 @@
     <main>
       <section class="profile">
         <div class="profile__personal">
-          <img src="<%=require('./images/profile.jpg')%>" alt="Фото профиля" class="profile__photo">
+          <img src="https://pictures.s3.yandex.net/frontend-developer/common/ava.jpg" alt="Фото профиля" class="profile__photo">
+          <button class="profile__photo-edit" type="button"></button>
           <div class="profile__info">
-            <h1 class="profile__name">Денис Хажеев</h1>
+            <h1 class="profile__name"></h1>
             <button type="button" class="profile__change">
               <img src="<%=require('./images/pen.svg')%>" alt="Изменить профиль">
             </button>
-            <p class="profile__about">Физик, программист и вожатый</p>
+            <p class="profile__about"></p>
           </div>
         </div>
         <button type="button" class="profile__add">
@@ -60,15 +61,34 @@
       </div>
       <button type="button" class="popup__close-button "></button>
     </div>
+    <div class="popup" id="popupDelet">
+      <div class="form popup__delet">
+        <h2 class="form__title">Вы уверены?</h2>
+        <button type="submit" class="form__save-button" style="margin-top: 0;" id="deletPlace">Да</button>
+      </div>
+      <button type="button" class="popup__close-button "></button>
+    </div>
+    <div class="popup " id="popupEditAvatar">
+      <form class="form" id="formEditAvatar">
+        <h2 class="form__title" >Обновить аватар</h2>
+        <input class="form__input" placeholder="Ссылка на новый аватар" id="form__input" name="form__link" style="margin: 0;" required type="url">
+        <span class="form__input-error form__link-error"></span>
+        <button type="submit" class="form__save-button" id="newPlace" disabled style="margin-top: 43px;">Сохранить</button>
+      </form>
+      <button type="button" class="popup__close-button"></button>
+    </div>
     <template id="templateCard">
       <div class="element">
         <button class="element__img-popup">
           <img class="element__img">
         </button>
-        <button type="button" class="element__delete" ></button>
+        <button type="button" class="element__delete" id="deletButton"></button>
         <div class="element__name">
           <h2 class="element__paragraph"></h2>
-          <button type="button" class="element__like"></button>
+          <div class="element__like-zone">
+            <button type="button" class="element__like"></button>
+            <span class="element__counter">0</span>
+          </div>
         </div>
       </div>
     </template>
