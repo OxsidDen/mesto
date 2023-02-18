@@ -32,7 +32,7 @@ export const avaterChange = document.querySelector(".profile__photo-edit")
 export const avatarLink = formEditAvatar.querySelector(".form__input")
 export const buttonText = {
     save: "Сохранить",
-    saving: "Сохранение",
+    saving: "Сохранение...",
     create: "Создать",
-    creating: "Создание",
+    creating: "Создание...",
 }
