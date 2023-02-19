@@ -19,14 +19,13 @@ import {
     popupViewSelector,
     elementSelector,
     avatar,
-    profileName,
-    profileAbout,
-    sectionElements,
     popupDeletSelector,
     aceptButton,
     avaterChange,
     avatarLink,
     buttonText,
+    aboutInput,
+    nameInput
 } from '../constants.js';
 import Section from '../components/Section.js';
 import Popup from '../components/Popup.js'
@@ -48,29 +47,44 @@ const api = new Api({
     authorization: '08c90c1a-1998-40ee-b8a2-c5f50d26b954'
 });
 
+Promise.all([api.getCards(), api.getProfile()])
+    .then(([cards, prof]) => {
+        id = prof._id;
+        avatar.src = prof.avatar;
+        userInfo.setUserInfo(prof);
+        cardsList.renderingCard(cards);
+    })
+    .catch((err) => {
+        console.log(err); 
+    }); 
+
 const profilePopup = new PopupWithForm({
     popupSelector: popupProfSelector,
     formSubmit: (evt) =>  { //функция сохранения данных полученных от пользователя при изменении профиля
         evt.preventDefault();
-        newCardPopup.loading(true)
-        userInfo.setUserInfo();
-        api.changeProfile(profileName.textContent, profileAbout.textContent)
+        newCardPopup.setButtonText(buttonText.saving);
+
+        api.changeProfile(nameInput.value, aboutInput.value)
+            .then((res) => {
+                userInfo.setUserInfo(res);
+            })
+            .then(() => {
+                profilePopup.close();
+            })
             .catch((err) => {
                 console.log(err);
             })
             .finally(() => {
-                newCardPopup.loading(false);
+                newCardPopup.setButtonText(buttonText.save);
             })
-        profilePopup.close();
     },
-    loadingText: buttonText.saving,
-    defoltText: buttonText.save,
 });
+
 const newCardPopup = new PopupWithForm({
     popupSelector: popupPlaceSelector, 
     formSubmit: (evt) => { //функция сохранения данных полученных от пользователя при добовления новой карточки
         evt.preventDefault();
-        newCardPopup.loading(true)
+        newCardPopup.setButtonText(buttonText.creating)
         const newCardvalue = {
             name: placeName.value,
             link: placeLink.value,
@@ -79,41 +93,39 @@ const newCardPopup = new PopupWithForm({
             .then((res) => {
                 const newCard = createNewCard(res);
                 const element = newCard.renderCard();
-                sectionElements.prepend(element);
+                cardsList.renderItems(element);
+            })
+            .then(() => {
+                newCardPopup.close();
             })
             .catch((err) => {
                 console.log(err); 
             })
             .finally(() => {
-                newCardPopup.loading(false);
+                newCardPopup.setButtonText(buttonText.create);
             })
-        
-        newCardPopup.close();
-    },
-    loadingText: buttonText.creating,
-    defoltText: buttonText.create,
+    }
 });
 
 const editProfilePopup = new PopupWithForm({
     popupSelector: popupAvatarSelector,
     formSubmit: (evt) => {
         evt.preventDefault();
-        newCardPopup.loading(true)
+        newCardPopup.setButtonText(buttonText.saving)
         api.changeAvatar(avatarLink.value)
             .then(res => {
                 avatar.src = res.avatar;
+            })
+            .then(() => {
+                editProfilePopup.close();
             })
             .catch((err) => {
                 console.log(err); 
             })
             .finally(() => {
-                newCardPopup.loading(false);
+                newCardPopup.setButtonText(buttonText.save);
             })
-
-        editProfilePopup.close();
-    },
-    loadingText: buttonText.saving,
-    defoltText: buttonText.save,
+    }
 })
 
 const createNewCard = (element) => { //создание новой карточки
@@ -157,38 +169,40 @@ const createNewCard = (element) => { //создание новой карточ�
         templateSelector);
     return newCards;
 };
+
+const cardsList = new Section({
+    renderer: (card) => {
+        const defaultCards = createNewCard(card);
+        const element = defaultCards.renderCard();
+        defaultCards.calculateLike(card);
+        cardsList.renderItems(element);
+    }
+}, elementSelector);
+
 const cardView = new PopupWithImage(popupViewSelector); //попап с просмтором карточки
 const userInfo = new UserInfo(         // информация о пользователе
 {
     nameSelector: profNameSelector,
     aboutSelector: profAboutSelector,
-    getProf: api.getProfile()//  получение данных о пользователе с сервера
-        .then(res => {
-            avatar.src = res.avatar;
-            profileName.textContent = res.name;
-            profileAbout.textContent = res.about;
-            id = res._id
-            return id
-        })
-        .catch((err) => {
-            console.log(err); 
-        })
 });
-
-userInfo.myId()
 
 profileChange.addEventListener('click', function(){ // открытие формы для изменения профиля
     profilePopup.open();
-    userInfo.getUserInfo(); 
+    formProfileValid.resetValid();
+    const data = userInfo.getUserInfo()
+    nameInput.value = data.profName;
+    aboutInput.value = data.profAbout; 
 });
 
 placeAdd.addEventListener('click', function(){ // открытие формы для добовлания постов
-    newCardPopup.open()
+    newCardPopup.open();
+    formPlaceValid.resetValid();
     formPlaceValid.disableButton();
 });
 
 avaterChange.addEventListener('click', function(){
     editProfilePopup.open();
+    avatarEditValid.resetValid();
     avatarEditValid.disableButton();
 })
 
@@ -197,20 +211,3 @@ newCardPopup.setEventListeners();
 cardView.setEventListeners(); 
 popupDeletCard.setEventListeners();
 editProfilePopup.setEventListeners();
-
-api.getCards() // Загрузка карточек с сервера
-    .then(res => {
-        const cardsList = new Section({
-            items: res,
-            renderer: (card) => {
-                const defaultCards = createNewCard(card);
-                const element = defaultCards.renderCard();
-                defaultCards.calculateLike(card);
-                cardsList.addItem(element);
-            }
-        }, elementSelector);
-        cardsList.renderingCard()
-    })
-    .catch((err) => {
-        console.log(err); 
-    }); 

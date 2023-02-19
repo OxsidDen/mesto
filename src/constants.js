@@ -23,9 +23,6 @@ export const profAboutSelector = ".profile__about";
 export const popupViewSelector = "#popupView";
 export const elementSelector = '.elements';
 export const avatar = document.querySelector(".profile__photo")
-export const profileName = document.querySelector(profNameSelector);
-export const profileAbout = document.querySelector(profAboutSelector);
-export const sectionElements = document.querySelector('.elements');
 export const popupDeletSelector = '#popupDelet';
 export const aceptButton = document.querySelector('#deletPlace');
 export const avaterChange = document.querySelector(".profile__photo-edit")
@@ -36,3 +33,5 @@ export const buttonText = {
     create: "Создать",
     creating: "Создание...",
 }
+export const aboutInput = document.querySelector('#form__about');
+export const nameInput = document.querySelector('#form__name');

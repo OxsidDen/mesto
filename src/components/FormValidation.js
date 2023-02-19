@@ -21,6 +21,14 @@ export class FormValidation {
         errorEl.classList.add(this._errorTextClass);
     }
 
+    resetValid(){
+        this._inputList.forEach((inputEl) => {
+            const errorEl = this._form.querySelector(`.${inputEl.id}-error`);
+            this._hideError(inputEl,errorEl)
+        })
+        
+    }
+
     _testValid(inputEl){
         const errorEl = this._form.querySelector(`.${inputEl.id}-error`);
         if (!inputEl.validity.valid) {
@@ -46,6 +54,7 @@ export class FormValidation {
         this._saveButton.disabled = true;
     }
 
+  
     _switchButton(){
         if (this._hasInvalidInput()) {
             this.disableButton();

@@ -1,25 +1,20 @@
 export default class UserInfo {
 
-constructor({nameSelector, aboutSelector, getProf}){
-    this._nameSelector = document.querySelector(nameSelector);
-    this._aboutSelector = document.querySelector(aboutSelector);
-    this._aboutInput = document.querySelector('#form__about');
-    this._nameInput = document.querySelector('#form__name');
-    this._profile = getProf;
-    this._id = getProf._id
+constructor({nameSelector, aboutSelector}){
+    this._name = document.querySelector(nameSelector);
+    this._about = document.querySelector(aboutSelector);
 }
 
 getUserInfo(){
-    this._nameInput.value =  this._nameSelector.textContent;
-    this._aboutInput.value = this._aboutSelector.textContent;
+    const userInfo = {
+        profName: this._name.textContent,
+        profAbout: this._about.textContent
+    }
+    return userInfo
 }
 
-setUserInfo(){
-    this._nameSelector.textContent = this._nameInput.value;
-    this._aboutSelector.textContent = this._aboutInput.value;
-}
-
-myId(){
-    return this._id;
+setUserInfo(data){
+    this._name.textContent = data.name;
+    this._about.textContent = data.about;
 }
 }
