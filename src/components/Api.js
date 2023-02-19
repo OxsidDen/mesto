@@ -11,7 +11,7 @@ export default class Api {
                 authorization:  this._authorization
             }
         })
-            .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+        .then(res => this._chekStatus(res))
     };
     
     getCards = () => {
@@ -20,10 +20,10 @@ export default class Api {
                 authorization:  this._authorization
             }
         })
-            .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+        .then(res => this._chekStatus(res))
     };
     
-    changeProfile = (name, about) => {
+    changeProfile = (data) => {
         return  fetch(this._baseUrl + '/users/me', {
             method: 'PATCH',
              headers: {
@@ -31,14 +31,14 @@ export default class Api {
                  'Content-Type': 'application/json'
              },
             body: JSON.stringify({
-                name: name,
-                about: about
+                name: data.name,
+                about: data.about
               }) 
          })
-             .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
-     };
+            .then(res => this._chekStatus(res))
+        };
     
-    addNewPost = (place, link) => {
+    addNewPost = (data) => {
         return  fetch(this._baseUrl + '/cards', {
             method: 'POST',
              headers: {
@@ -46,12 +46,12 @@ export default class Api {
                  'Content-Type': 'application/json'
              },
             body: JSON.stringify({
-                link: link,
-                name: place,
+                link: data.link,
+                name: data.place,
               }) 
          })
-             .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
-     };
+            .then(res => this._chekStatus(res))
+        };
     
     deletCard = (id) => {
         return  fetch(this._baseUrl + '/cards/' + id, {
@@ -60,10 +60,10 @@ export default class Api {
                  authorization:  this._authorization,
              }
         })
-             .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
-     };
+        .then(res => this._chekStatus(res))
+    };
 
-    changeAvatar = (link) => {
+    changeAvatar = (data) => {
     return  fetch(this._baseUrl + '/users/me/avatar', {
         method: 'PATCH',
         headers: {
@@ -71,11 +71,11 @@ export default class Api {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            avatar: link
+            avatar: data.avatar
         }) 
     })
-        .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
-    }
+        .then(res => this._chekStatus(res))
+}
 
     putLike = (id) => {
         return  fetch(this._baseUrl + '/cards/' + id + '/likes', {
@@ -84,8 +84,8 @@ export default class Api {
                 authorization: this._authorization,
             }
         })
-            .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
-        }
+        .then(res => this._chekStatus(res))
+    }
 
     deletLike = (id) => {
         return  fetch(this._baseUrl + '/cards/' + id + '/likes', {
@@ -94,7 +94,10 @@ export default class Api {
                 authorization: this._authorization,
             }
         })
-            .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+            .then(res => this._chekStatus(res))
         }
-        
+    
+    _chekStatus(res){
+        return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+    }
 }

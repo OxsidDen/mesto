@@ -22,7 +22,6 @@ import {
     popupDeletSelector,
     aceptButton,
     avaterChange,
-    avatarLink,
     buttonText,
     aboutInput,
     nameInput
@@ -60,36 +59,31 @@ Promise.all([api.getCards(), api.getProfile()])
 
 const profilePopup = new PopupWithForm({
     popupSelector: popupProfSelector,
-    formSubmit: (evt) =>  { //функция сохранения данных полученных от пользователя при изменении профиля
-        evt.preventDefault();
-        newCardPopup.setButtonText(buttonText.saving);
-
-        api.changeProfile(nameInput.value, aboutInput.value)
+    formSubmit: (data) =>  { //функция сохранения данных полученных от пользователя при изменении профиля
+        profilePopup.setButtonText(buttonText.saving);
+        api.changeProfile(data)
             .then((res) => {
+                
                 userInfo.setUserInfo(res);
             })
             .then(() => {
                 profilePopup.close();
             })
+            .finally(() => {
+                profilePopup.setButtonText(buttonText.save);
+            })
             .catch((err) => {
                 console.log(err);
             })
-            .finally(() => {
-                newCardPopup.setButtonText(buttonText.save);
-            })
+
     },
 });
 
 const newCardPopup = new PopupWithForm({
     popupSelector: popupPlaceSelector, 
-    formSubmit: (evt) => { //функция сохранения данных полученных от пользователя при добовления новой карточки
-        evt.preventDefault();
-        newCardPopup.setButtonText(buttonText.creating)
-        const newCardvalue = {
-            name: placeName.value,
-            link: placeLink.value,
-        };
-        api.addNewPost(newCardvalue.name, newCardvalue.link)
+    formSubmit: (data) => { //функция сохранения данных полученных от пользователя при добовления новой карточки
+        newCardPopup.setButtonText(buttonText.creating);
+        api.addNewPost(data)
             .then((res) => {
                 const newCard = createNewCard(res);
                 const element = newCard.renderCard();
@@ -109,10 +103,9 @@ const newCardPopup = new PopupWithForm({
 
 const editProfilePopup = new PopupWithForm({
     popupSelector: popupAvatarSelector,
-    formSubmit: (evt) => {
-        evt.preventDefault();
-        newCardPopup.setButtonText(buttonText.saving)
-        api.changeAvatar(avatarLink.value)
+    formSubmit: (data) => {
+        editProfilePopup.setButtonText(buttonText.saving);
+        api.changeAvatar(data)
             .then(res => {
                 avatar.src = res.avatar;
             })
@@ -123,7 +116,7 @@ const editProfilePopup = new PopupWithForm({
                 console.log(err); 
             })
             .finally(() => {
-                newCardPopup.setButtonText(buttonText.save);
+                editProfilePopup.setButtonText(buttonText.save);
             })
     }
 })
